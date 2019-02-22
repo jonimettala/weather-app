@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
 import NavBar from './components/NavBar';
 import SearchField from './components/SearchField';
+import WeatherList from './components/WeatherList';
 
 class App extends Component {
   render() {
@@ -9,6 +9,7 @@ class App extends Component {
       <div>
         <NavBar />
         <SearchField />
+        <WeatherList />
       </div>
     );
   }
