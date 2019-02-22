@@ -38,7 +38,7 @@ function CustomizedInputBase(props) {
       <IconButton className={classes.iconButton} aria-label="Menu">
         <MenuIcon />
       </IconButton>
-      <InputBase className={classes.input} placeholder="Search Weather" />
+      <InputBase className={classes.input} placeholder="Search Weather" autoFocus />
       <IconButton className={classes.iconButton} aria-label="Search" onClick={() => props.fetchWeather("Oulu")} >
         <SearchIcon />
       </IconButton>
