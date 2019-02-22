@@ -4,8 +4,8 @@ import SearchField from './components/SearchField';
 import WeatherList from './components/WeatherList';
 
 class App extends Component {
-  fetchWeather = () => {
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=Helsinki&appid=7cc61ea99e1925b1ad21c6d78f349973')
+  fetchWeather = (location) => {
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=7cc61ea99e1925b1ad21c6d78f349973')
     .then(response => response.json())
     .then(data => {
       console.log(data)
@@ -17,7 +17,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <SearchField fetchWeather={() => this.fetchWeather()} />
+        <SearchField fetchWeather={(location) => this.fetchWeather(location)} />
         <WeatherList />
       </div>
     );
