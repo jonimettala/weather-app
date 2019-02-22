@@ -39,7 +39,7 @@ function CustomizedInputBase(props) {
         <MenuIcon />
       </IconButton>
       <InputBase className={classes.input} placeholder="Search Weather" />
-      <IconButton className={classes.iconButton} aria-label="Search">
+      <IconButton className={classes.iconButton} aria-label="Search" onClick={() => props.fetchWeather()} >
         <SearchIcon />
       </IconButton>
     </Paper>

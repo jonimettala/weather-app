@@ -29,22 +29,6 @@ const styles = theme => ({
 function AutoGridNoWrap(props) {
   const { classes } = props;
 
-  /*
-  return (
-      <Paper className={classes.paper}>
-        <Grid container wrap="nowrap" spacing={16}>
-          <Grid item>
-            <Avatar>W</Avatar>
-          </Grid>
-          <Grid item xs>
-            <Typography>{message}</Typography>
-          </Grid>
-        </Grid>
-      </Paper>
-  );
-  */
-
-
   return (
     <Paper className={classes.paper}>
       <List className={classes.root}>
