@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
 const styles = {
@@ -35,9 +34,6 @@ function CustomizedInputBase(props) {
 
   return (
     <Paper className={classes.root} elevation={1}>
-      <IconButton className={classes.iconButton} aria-label="Menu">
-        <MenuIcon />
-      </IconButton>
       <InputBase
         className={classes.input}
         placeholder="Search Weather"
