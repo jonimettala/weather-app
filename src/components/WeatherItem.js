@@ -23,14 +23,29 @@ const styles = theme => ({
     maxWidth: 800,
     margin: `${theme.spacing.unit}px auto`,
     padding: theme.spacing.unit * 2,
-  },
+  }
 });
 
 function AutoGridNoWrap(props) {
   const { classes } = props;
-  const data = props.weatherData
+
+  let data;
+  if (props.weatherData.cod !== "404") {
+    data = props.weatherData;
+  } else {
+    return (
+      <Paper className={classes.paper}>
+      <List className={classes.root}>
+        <ListItem alignItems="flex-start">
+          <ListItemText primary={"Location not found"} />
+        </ListItem>
+      </List>
+    </Paper>
+    )
+  }
 
   const generateName = () => {
+    console.log(data)
     if (data) {
      return data.name + ", " + data.sys.country
     } else {
