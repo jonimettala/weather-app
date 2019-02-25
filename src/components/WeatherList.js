@@ -19,12 +19,25 @@ const styles = theme => ({
 function AutoGridNoWrap(props) {
   const { classes } = props;
 
+  const showLastSearch = () => {
+    if (props.lastSearch !== null) {
+      return <WeatherItem weatherData={props.lastSearch} />
+    }
+  }
+
+  const showSavedWeathers = () => {
+    let savedWeathers;
+    for (let weather of props.savedWeathers) {
+      savedWeathers += <WeatherItem weatherData={weather} saved={false}/>;
+    }
+    return savedWeathers;
+  }
+
   return (
     <div className={classes.root}>
-      <WeatherItem />
-      <WeatherItem />
-      <WeatherItem />
-      <WeatherItem />
+      {showLastSearch()}
+      {showSavedWeathers()}
+      {showSavedWeathers()}
     </div>
   );
 }

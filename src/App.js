@@ -7,7 +7,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state =  {
-      searchInput: ""
+      searchInput: "",
+      lastSearch: null,
+      savedWeathers: []
     };
   }
 
@@ -19,9 +21,14 @@ class App extends Component {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=7cc61ea99e1925b1ad21c6d78f349973')
     .then(response => response.json())
     .then(data => {
+      this.setState({lastSearch: data})
       console.log(data);
     })
     .catch(error => console.error(error))
+  }
+
+  saveWeather = (weatherData) => {
+    this.setState({savedWeathers: this.state.savedWeathers.push(weatherData)});
   }
 
   render() {
@@ -33,7 +40,10 @@ class App extends Component {
           updateSearchingState={(event) => this.updateSearching(event)}
           searchInput={this.state.searchInput}
         />
-        <WeatherList />
+        <WeatherList
+          lastSearch={this.state.lastSearch}
+          savedWeathers={this.state.savedWeathers}
+        />
       </div>
     );
   }

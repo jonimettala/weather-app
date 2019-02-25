@@ -28,6 +28,31 @@ const styles = theme => ({
 
 function AutoGridNoWrap(props) {
   const { classes } = props;
+  const data = props.weatherData
+
+  const generateName = () => {
+    if (data) {
+     return data.name + ", " + data.sys.country
+    } else {
+      return "City, Country"
+    }
+  }
+
+  const showSaveButton = () => {
+    if (props.saved) {
+      return (
+        <IconButton aria-label="Delete" className={classes.margin}>
+          <DeleteIcon />
+        </IconButton>
+      )
+    } else {
+      return (
+        <IconButton aria-label="Add" className={classes.margin}>
+          <AddIcon />
+        </IconButton>
+      )
+    }
+  }
 
   return (
     <Paper className={classes.paper}>
@@ -37,7 +62,7 @@ function AutoGridNoWrap(props) {
             <Avatar>D</Avatar>
           </ListItemAvatar>
           <ListItemText
-            primary="London, GB"
+            primary={generateName()}
             secondary={
               <React.Fragment>
                 <Typography component="span" className={classes.inline} color="textPrimary">
@@ -104,12 +129,7 @@ function AutoGridNoWrap(props) {
           <ListItemText
             secondary={
               <React.Fragment>
-                <IconButton aria-label="Delete" className={classes.margin}>
-                  <DeleteIcon />
-                </IconButton>
-                <IconButton aria-label="Add" className={classes.margin}>
-                  <AddIcon />
-                </IconButton>
+                {showSaveButton()}
               </React.Fragment>
             }
           />
