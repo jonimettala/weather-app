@@ -38,8 +38,19 @@ function CustomizedInputBase(props) {
       <IconButton className={classes.iconButton} aria-label="Menu">
         <MenuIcon />
       </IconButton>
-      <InputBase className={classes.input} placeholder="Search Weather" autoFocus />
-      <IconButton className={classes.iconButton} aria-label="Search" onClick={() => props.fetchWeather("Oulu")} >
+      <InputBase
+        className={classes.input}
+        placeholder="Search Weather"
+        onChange={(event) => props.updateSearchingState(event)}
+        onKeyPress={(ev) => {
+          if (ev.key === 'Enter') {
+            props.fetchWeather(props.searchInput)
+            ev.preventDefault();
+          }
+        }}
+        autoFocus
+      />
+      <IconButton className={classes.iconButton} aria-label="Search" onClick={() => props.fetchWeather(props.searchInput)} >
         <SearchIcon />
       </IconButton>
     </Paper>
