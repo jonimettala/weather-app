@@ -66,6 +66,11 @@ function WeatherItem(props) {
     )
   }
 
+  // Converts Kelvin to Celsius and rounds to one decimal
+  const toCelsius = (kelvin) => {
+    return Math.round((kelvin - 273.15) * 10) / 10
+  }
+
   return (
     <Paper className={classes.paper}>
       <List className={classes.root}>
@@ -79,9 +84,10 @@ function WeatherItem(props) {
               secondary={
                 <React.Fragment>
                   <Typography component="span" className={classes.inline} color="textPrimary">
-                    7°C, Drizzle
+                    {`${toCelsius(props.data.main.temp)} °C, ${props.data.weather[0].main}`}
                   </Typography>
-                  {"min X°C, max Y°C, light intensity drizzle"}
+                  {`min ${toCelsius(props.data.main.temp_min)} °C, max ${toCelsius(props.data.main.temp_max)} °C,
+                  ${props.data.weather[0].description}`}
                 </React.Fragment>
               }
             />
@@ -93,7 +99,7 @@ function WeatherItem(props) {
                   <Typography component="span" className={classes.inline} color="textPrimary">
                     Clouds
                   </Typography>
-                  {"90 %"}
+                  {`${props.data.clouds.all}%`}
                 </React.Fragment>
               }
             />
@@ -103,7 +109,7 @@ function WeatherItem(props) {
                   <Typography component="span" className={classes.inline} color="textPrimary">
                     Wind
                   </Typography>
-                  {"4.1 80 deg"}
+                  {`${props.data.wind.speed} m/s`}
                 </React.Fragment>
               }
             />
@@ -123,9 +129,9 @@ function WeatherItem(props) {
               secondary={
                 <React.Fragment>
                   <Typography component="span" className={classes.inline} color="textPrimary">
-                    Wind
+                    Pressure
                   </Typography>
-                  {"pressure"}
+                  {`${props.data.main.pressure} hpa`}
                 </React.Fragment>
               }
             />
@@ -135,7 +141,7 @@ function WeatherItem(props) {
                   <Typography component="span" className={classes.inline} color="textPrimary">
                     Humidity
                   </Typography>
-                  {"humidity"}
+                  {`${props.data.main.humidity}%`}
                 </React.Fragment>
               }
             />
