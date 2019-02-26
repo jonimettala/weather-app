@@ -60,7 +60,7 @@ function WeatherItem(props) {
     );
   } else {
     saveButton = (
-      <IconButton aria-label="Add" className={classes.margin}>
+      <IconButton aria-label="Add" className={classes.margin} onClick={() => props.save(props.data)}>
         <AddIcon />
       </IconButton>
     );

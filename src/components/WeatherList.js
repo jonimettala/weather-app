@@ -21,22 +21,21 @@ function WeatherList(props) {
 
   const showLastSearch = () => {
     if (props.lastSearch !== null) {
-      return <WeatherItem data={props.lastSearch} loading={props.loading} error={props.error} />;
+      return <WeatherItem 
+        data={props.lastSearch}
+        save={(weatherData) => props.saveWeather(weatherData)}
+        loading={props.loading}
+        error={props.error}
+      />;
     }
-  }
-
-  const showSavedWeathers = () => {
-    let savedWeathers;
-    for (let weather of props.savedWeathers) {
-      savedWeathers += <WeatherItem data={weather} saved={false}/>;
-    }
-    return savedWeathers;
   }
 
   return (
     <div className={classes.root}>
       {showLastSearch()}
-      {showSavedWeathers()}
+      {props.savedWeathers.map((weather) => (
+        <WeatherItem data={weather} saved={false}/>
+      ))}
     </div>
   );
 }

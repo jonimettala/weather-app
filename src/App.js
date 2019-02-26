@@ -49,7 +49,12 @@ class App extends Component {
   }
 
   saveWeather = (weatherData) => {
-    this.setState({ savedWeathers: this.state.savedWeathers.concat(weatherData) });
+    this.setState({ savedWeathers: [weatherData].concat(this.state.savedWeathers) },
+    () => {
+      if (this.state.debugging) {
+        console.log(this.state.savedWeathers);
+      }
+    });
   }
 
   render() {
@@ -64,6 +69,7 @@ class App extends Component {
         <WeatherList
           lastSearch={this.state.lastSearch}
           savedWeathers={this.state.savedWeathers}
+          saveWeather={(weatherData) => this.saveWeather(weatherData)}
           error={this.state.error}
           loading={this.state.loading}
         />
