@@ -8,7 +8,7 @@ const NavBar = () => {
         <AppBar position="static">
             <Toolbar>
                 <Typography variant="title" color="inherit">
-                Weather App
+                Weather Now
                 </Typography>
             </Toolbar>
         </AppBar>
