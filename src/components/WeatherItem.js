@@ -44,15 +44,6 @@ function AutoGridNoWrap(props) {
     )
   }
 
-  const generateName = () => {
-    console.log(data)
-    if (data) {
-     return data.name + ", " + data.sys.country
-    } else {
-      return "City, Country"
-    }
-  }
-
   const showSaveButton = () => {
     if (props.saved) {
       return (
@@ -69,86 +60,96 @@ function AutoGridNoWrap(props) {
     }
   }
 
+  if (props.loading) {
+    return (<Typography>Ladataan...</Typography>)
+  }
+
+  if (props.error) {
+    return (<Typography>Virhe</Typography>)
+  }
+
   return (
     <Paper className={classes.paper}>
       <List className={classes.root}>
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar>D</Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary={generateName()}
-            secondary={
-              <React.Fragment>
-                <Typography component="span" className={classes.inline} color="textPrimary">
-                  7°C, Drizzle
-                </Typography>
-                {"min X°C, max Y°C, light intensity drizzle"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <ListItem alignItems="flex-start">
-          <ListItemText
-            secondary={
-              <React.Fragment>
-                <Typography component="span" className={classes.inline} color="textPrimary">
-                  Clouds
-                </Typography>
-                {"90 %"}
-              </React.Fragment>
-            }
-          />
-          <ListItemText
-            secondary={
-              <React.Fragment>
-                <Typography component="span" className={classes.inline} color="textPrimary">
-                  Wind
-                </Typography>
-                {"4.1 80 deg"}
-              </React.Fragment>
-            }
-          />
-          <ListItemText
-            secondary={
-              <React.Fragment>
-                <Typography component="span" className={classes.inline} color="textPrimary">
-                  Visibility
-                </Typography>
-                {"100%"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <ListItem alignItems="flex-start">
-          <ListItemText
-            secondary={
-              <React.Fragment>
-                <Typography component="span" className={classes.inline} color="textPrimary">
-                  Wind
-                </Typography>
-                {"pressure"}
-              </React.Fragment>
-            }
-          />
-          <ListItemText
-            secondary={
-              <React.Fragment>
-                <Typography component="span" className={classes.inline} color="textPrimary">
-                  Humidity
-                </Typography>
-                {"humidity"}
-              </React.Fragment>
-            }
-          />
-          <ListItemText
-            secondary={
-              <React.Fragment>
-                {showSaveButton()}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
+        <React.Fragment>
+          <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar>D</Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={`${data.name}, ${data.sys.country}`}
+              secondary={
+                <React.Fragment>
+                  <Typography component="span" className={classes.inline} color="textPrimary">
+                    7°C, Drizzle
+                  </Typography>
+                  {"min X°C, max Y°C, light intensity drizzle"}
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+          <ListItem alignItems="flex-start">
+            <ListItemText
+              secondary={
+                <React.Fragment>
+                  <Typography component="span" className={classes.inline} color="textPrimary">
+                    Clouds
+                  </Typography>
+                  {"90 %"}
+                </React.Fragment>
+              }
+            />
+            <ListItemText
+              secondary={
+                <React.Fragment>
+                  <Typography component="span" className={classes.inline} color="textPrimary">
+                    Wind
+                  </Typography>
+                  {"4.1 80 deg"}
+                </React.Fragment>
+              }
+            />
+            <ListItemText
+              secondary={
+                <React.Fragment>
+                  <Typography component="span" className={classes.inline} color="textPrimary">
+                    Visibility
+                  </Typography>
+                  {"100%"}
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+          <ListItem alignItems="flex-start">
+            <ListItemText
+              secondary={
+                <React.Fragment>
+                  <Typography component="span" className={classes.inline} color="textPrimary">
+                    Wind
+                  </Typography>
+                  {"pressure"}
+                </React.Fragment>
+              }
+            />
+            <ListItemText
+              secondary={
+                <React.Fragment>
+                  <Typography component="span" className={classes.inline} color="textPrimary">
+                    Humidity
+                  </Typography>
+                  {"humidity"}
+                </React.Fragment>
+              }
+            />
+            <ListItemText
+              secondary={
+                <React.Fragment>
+                  {showSaveButton()}
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+        </React.Fragment>
       </List>
     </Paper>
 );

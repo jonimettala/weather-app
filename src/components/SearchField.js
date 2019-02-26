@@ -40,7 +40,7 @@ function CustomizedInputBase(props) {
         onChange={(event) => props.updateSearchingState(event)}
         onKeyPress={(ev) => {
           if (ev.key === 'Enter') {
-            props.fetchWeather(props.searchInput)
+            props.fetchWeather(props.searchInput);
             ev.preventDefault();
           }
         }}

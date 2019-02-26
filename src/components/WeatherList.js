@@ -21,7 +21,7 @@ function AutoGridNoWrap(props) {
 
   const showLastSearch = () => {
     if (props.lastSearch !== null) {
-      return <WeatherItem weatherData={props.lastSearch} />
+      return <WeatherItem weatherData={props.lastSearch} loading={props.loading} error={props.error} />
     }
   }
 
@@ -36,7 +36,6 @@ function AutoGridNoWrap(props) {
   return (
     <div className={classes.root}>
       {showLastSearch()}
-      {showSavedWeathers()}
       {showSavedWeathers()}
     </div>
   );
