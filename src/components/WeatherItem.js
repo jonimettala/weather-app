@@ -26,7 +26,7 @@ const styles = theme => ({
   }
 });
 
-function AutoGridNoWrap(props) {
+function WeatherItem(props) {
   const { classes } = props;
 
   // If weather can't be shown, a special text will be displayed
@@ -50,20 +50,20 @@ function AutoGridNoWrap(props) {
     )
   }
 
-  const showSaveButton = () => {
-    if (props.saved) {
-      return (
-        <IconButton aria-label="Delete" className={classes.margin}>
-          <DeleteIcon />
-        </IconButton>
-      )
-    } else {
-      return (
-        <IconButton aria-label="Add" className={classes.margin}>
-          <AddIcon />
-        </IconButton>
-      )
-    }
+  // Button that either saves the weather item or removes it from saved items
+  let saveButton;
+  if (props.saved) {
+    saveButton = (
+      <IconButton aria-label="Delete" className={classes.margin}>
+        <DeleteIcon />
+      </IconButton>
+    )
+  } else {
+    saveButton = (
+      <IconButton aria-label="Add" className={classes.margin}>
+        <AddIcon />
+      </IconButton>
+    )
   }
 
   return (
@@ -142,7 +142,7 @@ function AutoGridNoWrap(props) {
             <ListItemText
               secondary={
                 <React.Fragment>
-                  {showSaveButton()}
+                  {saveButton}
                 </React.Fragment>
               }
             />
@@ -153,8 +153,8 @@ function AutoGridNoWrap(props) {
 );
 }
 
-AutoGridNoWrap.propTypes = {
+WeatherItem.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AutoGridNoWrap);
+export default withStyles(styles)(WeatherItem);

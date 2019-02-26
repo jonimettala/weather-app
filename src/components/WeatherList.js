@@ -16,7 +16,7 @@ const styles = theme => ({
   },
 });
 
-function AutoGridNoWrap(props) {
+function WeatherList(props) {
   const { classes } = props;
 
   const showLastSearch = () => {
@@ -41,8 +41,8 @@ function AutoGridNoWrap(props) {
   );
 }
 
-AutoGridNoWrap.propTypes = {
+WeatherList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AutoGridNoWrap);
+export default withStyles(styles)(WeatherList);

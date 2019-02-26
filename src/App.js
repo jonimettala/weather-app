@@ -15,11 +15,13 @@ class App extends Component {
     };
   }
 
+  // Callback function to update the user input
   updateSearching = (event) => {
     this.setState({ searchInput: event.target.value });
   }
 
   fetchWeather = (location) => {
+    // Let's try to do something only if location was entered
     if (location !== "") {
       this.setState({ loading: true, error: false })
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=7cc61ea99e1925b1ad21c6d78f349973`)
