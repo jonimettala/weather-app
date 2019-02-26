@@ -20,8 +20,8 @@ class App extends Component {
   }
 
   fetchWeather = (location) => {
-    this.setState({ loading: true, error: false })
     if (location !== "") {
+      this.setState({ loading: true, error: false })
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=7cc61ea99e1925b1ad21c6d78f349973`)
       .then(response => {
         if (response.ok) {

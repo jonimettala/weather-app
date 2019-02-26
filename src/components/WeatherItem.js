@@ -29,15 +29,21 @@ const styles = theme => ({
 function AutoGridNoWrap(props) {
   const { classes } = props;
 
-  let data;
-  if (props.weatherData.cod !== "404") {
-    data = props.weatherData;
-  } else {
+  // If weather can't be shown, a special text will be displayed
+  let specialText;
+  if (props.loading) {
+    specialText = "Loading..."
+  } else if (props.error) {
+    specialText = "Location can't be found!"
+  }
+
+
+  if (props.loading || props.error) {
     return (
       <Paper className={classes.paper}>
       <List className={classes.root}>
         <ListItem alignItems="flex-start">
-          <ListItemText primary={"Location not found"} />
+          <ListItemText primary={specialText} />
         </ListItem>
       </List>
     </Paper>
@@ -60,14 +66,6 @@ function AutoGridNoWrap(props) {
     }
   }
 
-  if (props.loading) {
-    return (<Typography>Ladataan...</Typography>)
-  }
-
-  if (props.error) {
-    return (<Typography>Virhe</Typography>)
-  }
-
   return (
     <Paper className={classes.paper}>
       <List className={classes.root}>
@@ -77,7 +75,7 @@ function AutoGridNoWrap(props) {
               <Avatar>D</Avatar>
             </ListItemAvatar>
             <ListItemText
-              primary={`${data.name}, ${data.sys.country}`}
+              primary={`${props.data.name}, ${props.data.sys.country}`}
               secondary={
                 <React.Fragment>
                   <Typography component="span" className={classes.inline} color="textPrimary">
