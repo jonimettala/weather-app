@@ -34,7 +34,7 @@ function WeatherList(props) {
     <div className={classes.root}>
       {showLastSearch()}
       {props.savedWeathers.map((weather) => (
-        <WeatherItem data={weather} saved={false}/>
+        <WeatherItem data={weather} saved={true}/>
       ))}
     </div>
   );
