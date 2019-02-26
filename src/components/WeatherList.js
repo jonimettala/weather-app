@@ -21,7 +21,7 @@ function WeatherList(props) {
 
   const showLastSearch = () => {
     if (props.lastSearch !== null) {
-      return <WeatherItem data={props.lastSearch} loading={props.loading} error={props.error} />
+      return <WeatherItem data={props.lastSearch} loading={props.loading} error={props.error} />;
     }
   }
 

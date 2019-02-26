@@ -32,10 +32,10 @@ function WeatherItem(props) {
   // If weather can't be shown, a special text will be displayed
   let specialText;
   if (props.loading) {
-    specialText = "Loading..."
+    specialText = 'Loading...';
   } else if (props.error) {
-    specialText = "Location can't be found!"
-  }
+    specialText = 'Location can\'t be found!';
+  };
 
 
   if (props.loading || props.error) {
@@ -47,8 +47,8 @@ function WeatherItem(props) {
         </ListItem>
       </List>
     </Paper>
-    )
-  }
+    );
+  };
 
   // Button that either saves the weather item or removes it from saved items
   let saveButton;
@@ -57,18 +57,18 @@ function WeatherItem(props) {
       <IconButton aria-label="Delete" className={classes.margin}>
         <DeleteIcon />
       </IconButton>
-    )
+    );
   } else {
     saveButton = (
       <IconButton aria-label="Add" className={classes.margin}>
         <AddIcon />
       </IconButton>
-    )
-  }
+    );
+  };
 
   // Converts Kelvin to Celsius and rounds to one decimal
   const toCelsius = (kelvin) => {
-    return Math.round((kelvin - 273.15) * 10) / 10
+    return Math.round((kelvin - 273.15) * 10) / 10;
   }
 
   return (
@@ -119,7 +119,7 @@ function WeatherItem(props) {
                   <Typography component="span" className={classes.inline} color="textPrimary">
                     Visibility
                   </Typography>
-                  {"100%"}
+                  {'100%'}
                 </React.Fragment>
               }
             />
@@ -156,7 +156,7 @@ function WeatherItem(props) {
         </React.Fragment>
       </List>
     </Paper>
-);
+  );
 }
 
 WeatherItem.propTypes = {
