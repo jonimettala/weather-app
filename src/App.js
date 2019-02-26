@@ -11,7 +11,8 @@ class App extends Component {
       lastSearch: null,
       savedWeathers: [],
       error: false,
-      loading: false
+      loading: false,
+      debugging: true
     };
   }
 
@@ -23,23 +24,26 @@ class App extends Component {
   fetchWeather = (location) => {
     // Let's try to do something only if location was entered
     if (location !== "") {
-      this.setState({ loading: true, error: false })
+      this.setState({ loading: true, error: false });
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=7cc61ea99e1925b1ad21c6d78f349973`)
       .then(response => {
         if (response.ok) {
-          return response
+          return response;
         } else {
-          throw Error('Location not found.')
+          throw Error('Location not found.');
         }
       })
       .then(response => response.json())
       .then(data => {
-        this.setState({ lastSearch: data, loading: false, error: false })
-        console.log(data);
+        this.setState({ lastSearch: data, loading: false, error: false },
+          () => {if (this.state.debugging) {
+            console.log(data);
+          }}
+        )
       })
       .catch(error => {
-        console.error(error)
-        this.setState({ lastSearch: "", loading: false, error: true })
+        console.error(error);
+        this.setState({ lastSearch: "", loading: false, error: true });
       })
     }
   }
