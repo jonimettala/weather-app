@@ -59,7 +59,9 @@ class App extends Component {
 
   handleWeatherSave = (weatherData, id) => {
     if (this.state.savedCities.includes(weatherData.name)) {
-      console.log(`handleWeatherSave, key: ${id}`)
+      if (id === -1) {
+        id = this.state.savedCities.indexOf(weatherData.name);
+      }
       this.removeWeather(id);
     } else {
       this.saveWeather(weatherData);
@@ -79,10 +81,13 @@ class App extends Component {
   }
 
   removeWeather = (id) => {
-    console.log(`Trying to remove index ${id}`)
     this.setState({
       savedWeathers: this.state.savedWeathers.filter((_, i) => i !== id),
       savedCities: this.state.savedCities.filter((_, i) => i !== id)
+    }, () => {
+      if (this.state.debugging) {
+        console.log(`Removed weather with id ${id}`);
+      }
     });
   }
 
