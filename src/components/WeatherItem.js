@@ -52,16 +52,18 @@ function WeatherItem(props) {
 
   // Button that either saves the weather item or removes it from saved items
   let saveButton;
-  if (props.saved) {
+  if (props.savedCities.includes(props.data.name)) {
     saveButton = (
-      <IconButton aria-label="Delete" className={classes.margin}>
+      <IconButton aria-label="Delete" className={classes.margin} onClick={() => {
+        props.handleSave(props.data, props.id);
+      }}>
         <DeleteIcon />
       </IconButton>
     );
   } else {
     saveButton = (
       <IconButton aria-label="Add" className={classes.margin} onClick={() => {
-        props.save(props.data);
+        props.handleSave(props.data, -1);
         props.clear();
         }}>
         <AddIcon />

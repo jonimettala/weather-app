@@ -10,6 +10,7 @@ class App extends Component {
       searchInput: "",
       lastSearch: null,
       savedWeathers: [],
+      savedCities: [],
       error: false,
       loading: false,
       debugging: true
@@ -56,13 +57,37 @@ class App extends Component {
     }
   }
 
+  handleWeatherSave = (weatherData, id) => {
+    if (this.state.savedCities.includes(weatherData.name)) {
+      console.log(`handleWeatherSave, key: ${id}`)
+      this.removeWeather(id);
+    } else {
+      this.saveWeather(weatherData);
+    }
+  }
+
   saveWeather = (weatherData) => {
-    this.setState({ savedWeathers: [weatherData].concat(this.state.savedWeathers) },
+    this.setState({
+      savedWeathers: [weatherData].concat(this.state.savedWeathers),
+      savedCities: [weatherData.name].concat(this.state.savedCities)
+     },
     () => {
       if (this.state.debugging) {
         console.log(this.state.savedWeathers);
       }
     });
+  }
+
+  removeWeather = (id) => {
+    console.log(`Trying to remove index ${id}`)
+    this.setState({
+      savedWeathers: this.state.savedWeathers.filter((_, i) => i !== id),
+      savedCities: this.state.savedCities.filter((_, i) => i !== id)
+    });
+  }
+
+  createKey = () => {
+    return this.state.savedCities.length;
   }
 
   render() {
@@ -77,7 +102,9 @@ class App extends Component {
         <WeatherList
           lastSearch={this.state.lastSearch}
           savedWeathers={this.state.savedWeathers}
-          saveWeather={(weatherData) => this.saveWeather(weatherData)}
+          savedCities={this.state.savedCities}
+          handleWeatherSave={(weatherData, id) => this.handleWeatherSave(weatherData, id)}
+          createKey={() => this.createKey()}
           error={this.state.error}
           loading={this.state.loading}
           clearLastResult={() => this.clearLastResult()}

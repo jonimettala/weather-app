@@ -14,6 +14,9 @@ const styles = theme => ({
     margin: `${theme.spacing.unit}px auto`,
     padding: theme.spacing.unit * 2,
   },
+  divider: {
+    marginTop: '100px',
+  }
 });
 
 function WeatherList(props) {
@@ -23,7 +26,8 @@ function WeatherList(props) {
     if (props.lastSearch !== null) {
       return <WeatherItem 
         data={props.lastSearch}
-        save={(weatherData) => props.saveWeather(weatherData)}
+        handleSave={(weatherData, id) => props.handleWeatherSave(weatherData, id)}
+        savedCities={props.savedCities}
         loading={props.loading}
         error={props.error}
         clear={() => props.clearLastResult()}
@@ -34,8 +38,13 @@ function WeatherList(props) {
   return (
     <div className={classes.root}>
       {showLastSearch()}
-      {props.savedWeathers.map((weather) => (
-        <WeatherItem data={weather} saved={true}/>
+      {props.savedWeathers.map((weather, i) => (
+        <WeatherItem
+          data={weather}
+          savedCities={props.savedCities}
+          handleSave={(weatherData, id) => props.handleWeatherSave(weatherData, id)}
+          key={i}
+          id={i} />
       ))}
     </div>
   );
