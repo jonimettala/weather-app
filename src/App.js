@@ -16,13 +16,21 @@ class App extends Component {
     };
   }
 
+  clearLastResult = () => {
+    this.setState({
+      lastSearch: null,
+      error: null,
+      loading: null
+    });
+  }
+
   // Callback function to update the user input
   updateSearching = (event) => {
     this.setState({ searchInput: event.target.value });
   }
 
   fetchWeather = (location) => {
-    // Let's try to do something only if location was entered
+    // Let's try to fetch location only if location was entered
     if (location !== "") {
       this.setState({ loading: true, error: false });
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=7cc61ea99e1925b1ad21c6d78f349973`)
@@ -39,7 +47,7 @@ class App extends Component {
           () => {if (this.state.debugging) {
             console.log(data);
           }}
-        )
+        );
       })
       .catch(error => {
         console.error(error);
@@ -72,6 +80,7 @@ class App extends Component {
           saveWeather={(weatherData) => this.saveWeather(weatherData)}
           error={this.state.error}
           loading={this.state.loading}
+          clearLastResult={() => this.clearLastResult()}
         />
       </div>
     );

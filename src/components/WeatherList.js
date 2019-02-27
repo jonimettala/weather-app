@@ -26,6 +26,7 @@ function WeatherList(props) {
         save={(weatherData) => props.saveWeather(weatherData)}
         loading={props.loading}
         error={props.error}
+        clear={() => props.clearLastResult()}
       />;
     }
   }

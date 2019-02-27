@@ -60,7 +60,10 @@ function WeatherItem(props) {
     );
   } else {
     saveButton = (
-      <IconButton aria-label="Add" className={classes.margin} onClick={() => props.save(props.data)}>
+      <IconButton aria-label="Add" className={classes.margin} onClick={() => {
+        props.save(props.data);
+        props.clear();
+        }}>
         <AddIcon />
       </IconButton>
     );
@@ -77,7 +80,7 @@ function WeatherItem(props) {
         <React.Fragment>
           <ListItem alignItems="flex-start">
             <ListItemAvatar>
-              <Avatar>D</Avatar>
+              <Avatar>{props.data.name.charAt(0)}</Avatar>
             </ListItemAvatar>
             <ListItemText
               primary={`${props.data.name}, ${props.data.sys.country}`}
