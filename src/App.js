@@ -38,7 +38,7 @@ class App extends Component {
         if (response.ok) {
           return response;
         } else {
-          throw Error('Location not found.');
+          throw Error(`Location not found.\n\nNo weather data available for location '${location}'.`);
         }
       })
       .then(response => response.json())
