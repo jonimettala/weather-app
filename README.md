@@ -1,3 +1,7 @@
+## Weather Now
+
+Weather Now is a weather explorer for showing the current weather in inputted city around the world.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
