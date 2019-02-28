@@ -13,7 +13,7 @@ The app will show following information:
 - Pressure
 - Coordinates
 
-The weather data is saved to browser's local storage so you can checkout the site every day to see the current weather in your own favorite cities.
+The weather data is saved to browser's local storage and is updated every time you visit the site. This means you can visit the app daily to easily see your favorite locations' weather!
 
 The app is hosted on [GitHub Pages](https://jonimettala.github.io/weather-app/).
 
