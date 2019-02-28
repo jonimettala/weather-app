@@ -17,6 +17,29 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    this.loadFromLocalStorage();
+  }
+
+  saveToLocalStorage = () => {
+    localStorage.setItem('cities', JSON.stringify(this.state.savedCities));
+    localStorage.setItem('weathers', JSON.stringify(this.state.savedWeathers));
+  }
+
+  loadFromLocalStorage = () => {
+    try {
+      let weathers = JSON.parse(localStorage.getItem('weathers'));
+      let cities = JSON.parse(localStorage.getItem('cities'));
+
+      this.setState({
+        savedWeathers: weathers,
+        savedCities: cities
+      });
+    } catch (e) {
+      console.log('Nothing to load from Local Storage')
+    }
+  }
+
   clearLastResult = () => {
     this.setState({
       lastSearch: null,
@@ -74,6 +97,7 @@ class App extends Component {
       savedCities: [weatherData.name].concat(this.state.savedCities)
      },
     () => {
+      this.saveToLocalStorage();
       if (this.state.debugging) {
         console.log(this.state.savedWeathers);
       }
@@ -85,6 +109,7 @@ class App extends Component {
       savedWeathers: this.state.savedWeathers.filter((_, i) => i !== id),
       savedCities: this.state.savedCities.filter((_, i) => i !== id)
     }, () => {
+      this.saveToLocalStorage();
       if (this.state.debugging) {
         console.log(`Removed weather with id ${id}`);
       }
