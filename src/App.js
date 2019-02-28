@@ -19,6 +19,7 @@ class App extends Component {
 
   componentDidMount() {
     this.loadFromLocalStorage();
+    setTimeout(() => this.fetchUpdatedData(), 200);
   }
 
   // Saves saved locations to browser's local storage
@@ -84,6 +85,39 @@ class App extends Component {
         this.setState({ lastSearch: "", loading: false, error: true });
       })
     }
+  }
+
+  fetchUpdatedData = () => {
+    if (this.state.savedCities !== 0) {
+      let weathers = this.state.savedCities;
+      console.log(weathers)
+      this.setState({
+        savedWeathers: [],
+        savedCities: []
+      })
+      weathers.forEach((location) => {
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=7cc61ea99e1925b1ad21c6d78f349973`)
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            throw Error(`Location not found.\n\nNo weather data available for location '${location}'.`);
+          }
+        })
+        .then(response => response.json())
+        .then((data) => this.saveWeather(data))
+        .catch(error => {
+          console.error(error);
+        })
+      });
+    }
+  }
+
+  updateData = (weatherData) => {
+    let index = this.state.savedCities.indexOf(weatherData.name)
+    console.log('index: ' + index)
+    this.removeWeather(index);
+    this.saveWeather(weatherData)
   }
 
   // Callback function for saving or removing the location
