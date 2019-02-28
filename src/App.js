@@ -31,7 +31,7 @@ class App extends Component {
   // Loads saved locations from browser's local storage
   loadFromLocalStorage = () => {
     try {
-      let cities = []
+      let cities = [];
       let weathers = JSON.parse(localStorage.getItem('weathers'));
       cities = JSON.parse(localStorage.getItem('cities'));
 
@@ -42,7 +42,7 @@ class App extends Component {
         });
       }
     } catch (e) {
-      console.log('Error while trying to load local storage data')
+      console.log('Error while trying to load local storage data');
     }
   }
 
@@ -87,10 +87,17 @@ class App extends Component {
     }
   }
 
+  // Fetches updated data
+  /*
+    It would be reasonable to combine fetching parts of this and fetchWeather().
+    At the moment there is too much repeation of code between these two functions.
+
+    This function also doesn't update the weathers to the same order as they were
+    before, which is bad UX and should be fixed in the future.
+  */
   fetchUpdatedData = () => {
     if (this.state.savedCities !== 0) {
       let weathers = this.state.savedCities;
-      console.log(weathers)
       this.setState({
         savedWeathers: [],
         savedCities: []
@@ -111,13 +118,6 @@ class App extends Component {
         })
       });
     }
-  }
-
-  updateData = (weatherData) => {
-    let index = this.state.savedCities.indexOf(weatherData.name)
-    console.log('index: ' + index)
-    this.removeWeather(index);
-    this.saveWeather(weatherData)
   }
 
   // Callback function for saving or removing the location
