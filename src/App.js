@@ -21,13 +21,13 @@ class App extends Component {
     this.loadFromLocalStorage();
   }
 
-  // Saves weather data to browser's local storage
+  // Saves saved locations to browser's local storage
   saveToLocalStorage = () => {
     localStorage.setItem('cities', JSON.stringify(this.state.savedCities));
     localStorage.setItem('weathers', JSON.stringify(this.state.savedWeathers));
   }
 
-  // Loads weather data from browser's local storage
+  // Loads saved locations from browser's local storage
   loadFromLocalStorage = () => {
     try {
       let weathers = JSON.parse(localStorage.getItem('weathers'));
@@ -42,7 +42,7 @@ class App extends Component {
     }
   }
 
-  // Removes the last search result
+  // Removes the last search result from UI
   clearLastResult = () => {
     this.setState({
       lastSearch: null,

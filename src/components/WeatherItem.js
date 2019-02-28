@@ -50,7 +50,7 @@ function WeatherItem(props) {
     );
   };
 
-  // Button that either saves the weather item or removes it from saved items
+  // Button that either saves the location or removes it from saved locations
   let saveButton;
   if (props.savedCities.includes(props.data.name)) {
     saveButton = (

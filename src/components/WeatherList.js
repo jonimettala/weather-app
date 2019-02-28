@@ -22,6 +22,7 @@ const styles = theme => ({
 function WeatherList(props) {
   const { classes } = props;
 
+  // Shows the last search result data
   const showLastSearch = () => {
     if (props.lastSearch !== null) {
       return <WeatherItem 
