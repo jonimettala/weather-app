@@ -1,6 +1,21 @@
-## Weather Now
+## Weather Now - A Simple React Weather Explorer
 
 Weather Now is a weather explorer for showing the current weather in inputted city around the world.
+
+Search for a location and click the plus icon (+) to save it in your favorites. If you want to remove it, just click the trash bin icon instead.
+
+The app will show following information:
+- Current, max, and min temperature
+- A little description about the weather. Maybe it's snowing? Or just cloudy.
+- Cloud percentage
+- Wind m/s
+- Humidity
+- Pressure
+- Coordinates
+
+The weather data is saved to browser's local storage so you can checkout the site every day to see the current weather in your own favorite cities.
+
+The app is hosted on [GitHub Pages](https://jonimettala.github.io/weather-app/).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
