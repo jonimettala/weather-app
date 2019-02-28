@@ -126,9 +126,9 @@ function WeatherItem(props) {
               secondary={
                 <React.Fragment>
                   <Typography component="span" className={classes.inline} color="textPrimary">
-                    Visibility
+                    Humidity
                   </Typography>
-                  {'100%'}
+                  {`${props.data.main.humidity}%`}
                 </React.Fragment>
               }
             />
@@ -148,9 +148,9 @@ function WeatherItem(props) {
               secondary={
                 <React.Fragment>
                   <Typography component="span" className={classes.inline} color="textPrimary">
-                    Humidity
+                    Location
                   </Typography>
-                  {`${props.data.main.humidity}%`}
+                  {`lon: ${props.data.coord.lon}, lat: ${props.data.coord.lat}`}
                 </React.Fragment>
               }
             />
