@@ -13,7 +13,7 @@ class App extends Component {
       savedCities: [],
       error: false,
       loading: false,
-      debugging: true
+      debugging: false
     };
   }
 
