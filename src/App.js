@@ -30,13 +30,16 @@ class App extends Component {
   // Loads saved locations from browser's local storage
   loadFromLocalStorage = () => {
     try {
+      let cities = []
       let weathers = JSON.parse(localStorage.getItem('weathers'));
-      let cities = JSON.parse(localStorage.getItem('cities'));
+      cities = JSON.parse(localStorage.getItem('cities'));
 
-      this.setState({
-        savedWeathers: weathers,
-        savedCities: cities
-      });
+      if (cities.length !== 0) {
+        this.setState({
+          savedWeathers: weathers,
+          savedCities: cities
+        });
+      }
     } catch (e) {
       console.log('Error while trying to load local storage data')
     }

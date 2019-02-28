@@ -45,7 +45,8 @@ function WeatherList(props) {
           savedCities={props.savedCities}
           handleSave={(weatherData, id) => props.handleWeatherSave(weatherData, id)}
           key={i}
-          id={i} />
+          id={i}
+        />
       ))}
     </div>
   );
