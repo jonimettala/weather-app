@@ -8,7 +8,7 @@ The app will show following information:
 - Current, max, and min temperature
 - A little description about the weather. Maybe it's snowing? Or just cloudy.
 - Cloud percentage
-- Wind m/s
+- Wind
 - Humidity
 - Pressure
 - Coordinates
