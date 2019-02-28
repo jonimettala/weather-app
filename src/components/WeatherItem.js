@@ -26,6 +26,11 @@ const styles = theme => ({
   }
 });
 
+// Converts Kelvin to Celsius and rounds to one decimal
+function toCelsius(kelvin) {
+  return Math.round((kelvin - 273.15) * 10) / 10;
+}
+
 function WeatherItem(props) {
   const { classes } = props;
 
@@ -74,11 +79,6 @@ function WeatherItem(props) {
       </IconButton>
     );
   };
-
-  // Converts Kelvin to Celsius and rounds to one decimal
-  const toCelsius = (kelvin) => {
-    return Math.round((kelvin - 273.15) * 10) / 10;
-  }
 
   return (
     <Paper className={classes.paper}>
@@ -173,3 +173,4 @@ WeatherItem.propTypes = {
 };
 
 export default withStyles(styles)(WeatherItem);
+export { toCelsius };
