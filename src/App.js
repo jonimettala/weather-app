@@ -21,11 +21,13 @@ class App extends Component {
     this.loadFromLocalStorage();
   }
 
+  // Saves weather data to browser's local storage
   saveToLocalStorage = () => {
     localStorage.setItem('cities', JSON.stringify(this.state.savedCities));
     localStorage.setItem('weathers', JSON.stringify(this.state.savedWeathers));
   }
 
+  // Loads weather data from browser's local storage
   loadFromLocalStorage = () => {
     try {
       let weathers = JSON.parse(localStorage.getItem('weathers'));
@@ -36,10 +38,11 @@ class App extends Component {
         savedCities: cities
       });
     } catch (e) {
-      console.log('Nothing to load from Local Storage')
+      console.log('Error while trying to load local storage data')
     }
   }
 
+  // Removes the last search result
   clearLastResult = () => {
     this.setState({
       lastSearch: null,
@@ -80,6 +83,7 @@ class App extends Component {
     }
   }
 
+  // Callback function for saving or removing the location
   handleWeatherSave = (weatherData, id) => {
     if (this.state.savedCities.includes(weatherData.name)) {
       if (id === -1) {
@@ -91,6 +95,7 @@ class App extends Component {
     }
   }
 
+  // Saves the location to saved locations
   saveWeather = (weatherData) => {
     this.setState({
       savedWeathers: [weatherData].concat(this.state.savedWeathers),
@@ -104,6 +109,7 @@ class App extends Component {
     });
   }
 
+  // Removes the location from saved locations
   removeWeather = (id) => {
     this.setState({
       savedWeathers: this.state.savedWeathers.filter((_, i) => i !== id),
@@ -114,10 +120,6 @@ class App extends Component {
         console.log(`Removed weather with id ${id}`);
       }
     });
-  }
-
-  createKey = () => {
-    return this.state.savedCities.length;
   }
 
   render() {
@@ -134,7 +136,6 @@ class App extends Component {
           savedWeathers={this.state.savedWeathers}
           savedCities={this.state.savedCities}
           handleWeatherSave={(weatherData, id) => this.handleWeatherSave(weatherData, id)}
-          createKey={() => this.createKey()}
           error={this.state.error}
           loading={this.state.loading}
           clearLastResult={() => this.clearLastResult()}
