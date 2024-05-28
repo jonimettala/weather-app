@@ -21,7 +21,7 @@ const NavBar = (props) => {
   return(
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="title" color="inherit" className={classes.grow}>
+          <Typography variant="h6" color="inherit" className={classes.grow}>
             Weather Now
           </Typography>
           <Button color="inherit" href="https://github.com/jonimettala/weather-app">Fork on GitHub</Button>
