@@ -64,7 +64,7 @@ class App extends Component {
     // Let's try to fetch location only if location was entered
     if (location !== "") {
       this.setState({ loading: true, error: false });
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=7cc61ea99e1925b1ad21c6d78f349973`)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
       .then(response => {
         if (response.ok) {
           return response;
@@ -103,7 +103,7 @@ class App extends Component {
         savedCities: []
       })
       weathers.forEach((location) => {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=7cc61ea99e1925b1ad21c6d78f349973`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
         .then(response => {
           if (response.ok) {
             return response;
