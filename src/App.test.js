@@ -1,10 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import WeatherList from './components/WeatherList';
+import renderer from 'react-test-renderer';
 import { toCelsius } from './components/WeatherItem';
+import App from "./App";
 
-it('weatherlist renders without crashing', () => {
-  shallow(<WeatherList />);
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  renderer.create(<App />, div);
 });
 
 describe('Converting temperatures', () => {
