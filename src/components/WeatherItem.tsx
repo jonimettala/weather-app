@@ -11,7 +11,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
-
+import {toCelsius} from "../utils/utils";
 
 const styles = theme => ({
   root: {
@@ -26,12 +26,7 @@ const styles = theme => ({
   }
 });
 
-// Converts Kelvin to Celsius and rounds to one decimal
-function toCelsius(kelvin) {
-  return Math.round((kelvin - 273.15) * 10) / 10;
-}
-
-function WeatherItem(props) {
+const WeatherItem = (props) => {
   const { classes } = props;
 
   // If weather can't be shown, a special text will be displayed
@@ -155,11 +150,7 @@ function WeatherItem(props) {
               }
             />
             <ListItemText
-              secondary={
-                <React.Fragment>
-                  {saveButton}
-                </React.Fragment>
-              }
+                secondary={<React.Fragment>{saveButton}</React.Fragment>}
             />
           </ListItem>
         </React.Fragment>
@@ -173,4 +164,3 @@ WeatherItem.propTypes = {
 };
 
 export default withStyles(styles)(WeatherItem);
-export { toCelsius };

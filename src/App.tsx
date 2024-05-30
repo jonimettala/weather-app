@@ -24,7 +24,9 @@ class App extends Component {
 
   // Saves saved locations to browser's local storage
   saveToLocalStorage = () => {
+    // @ts-ignore
     localStorage.setItem('cities', JSON.stringify(this.state.savedCities));
+    // @ts-ignore
     localStorage.setItem('weathers', JSON.stringify(this.state.savedWeathers));
   }
 
@@ -32,7 +34,9 @@ class App extends Component {
   loadFromLocalStorage = () => {
     try {
       let cities = [];
+      // @ts-ignore
       let weathers = JSON.parse(localStorage.getItem('weathers'));
+      // @ts-ignore
       cities = JSON.parse(localStorage.getItem('cities'));
 
       if (cities.length !== 0) {
@@ -75,6 +79,7 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({ lastSearch: data, loading: false, error: false },
+            // @ts-ignore
           () => {if (this.state.debugging) {
             console.log(data);
           }}
@@ -90,13 +95,15 @@ class App extends Component {
   // Fetches updated data
   /*
     It would be reasonable to combine fetching parts of this and fetchWeather().
-    At the moment there is too much repeation of code between these two functions.
+    At the moment there is too much repetition of code between these two functions.
 
     This function also doesn't update the weathers to the same order as they were
     before, which is bad UX and should be fixed in the future.
   */
   fetchUpdatedData = () => {
+    // @ts-ignore
     if (this.state.savedCities !== 0) {
+      // @ts-ignore
       let weathers = this.state.savedCities;
       this.setState({
         savedWeathers: [],
@@ -122,8 +129,10 @@ class App extends Component {
 
   // Callback function for saving or removing the location
   handleWeatherSave = (weatherData, id) => {
+    // @ts-ignore
     if (this.state.savedCities.includes(weatherData.name)) {
       if (id === -1) {
+        // @ts-ignore
         id = this.state.savedCities.indexOf(weatherData.name);
       }
       this.removeWeather(id);
@@ -135,12 +144,16 @@ class App extends Component {
   // Saves the location to saved locations
   saveWeather = (weatherData) => {
     this.setState({
+      // @ts-ignore
       savedWeathers: [weatherData].concat(this.state.savedWeathers),
+      // @ts-ignore
       savedCities: [weatherData.name].concat(this.state.savedCities)
      },
     () => {
       this.saveToLocalStorage();
+        // @ts-ignore
       if (this.state.debugging) {
+        // @ts-ignore
         console.log(this.state.savedWeathers);
       }
     });
@@ -149,10 +162,13 @@ class App extends Component {
   // Removes the location from saved locations
   removeWeather = (id) => {
     this.setState({
+      // @ts-ignore
       savedWeathers: this.state.savedWeathers.filter((_, i) => i !== id),
+      // @ts-ignore
       savedCities: this.state.savedCities.filter((_, i) => i !== id)
     }, () => {
       this.saveToLocalStorage();
+      // @ts-ignore
       if (this.state.debugging) {
         console.log(`Removed weather with id ${id}`);
       }
@@ -164,16 +180,23 @@ class App extends Component {
       <div>
         <NavBar />
         <SearchField
+          // @ts-ignore
           fetchWeather={(location) => this.fetchWeather(location)}
           updateSearchingState={(event) => this.updateSearching(event)}
+          // @ts-ignore
           searchInput={this.state.searchInput}
         />
         <WeatherList
+          // @ts-ignore
           lastSearch={this.state.lastSearch}
+          // @ts-ignore
           savedWeathers={this.state.savedWeathers}
+          // @ts-ignore
           savedCities={this.state.savedCities}
           handleWeatherSave={(weatherData, id) => this.handleWeatherSave(weatherData, id)}
+          // @ts-ignore
           error={this.state.error}
+          // @ts-ignore
           loading={this.state.loading}
           clearLastResult={() => this.clearLastResult()}
         />
