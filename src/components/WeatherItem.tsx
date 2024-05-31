@@ -1,29 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
-import {toCelsius} from "../utils/utils";
+import React from "react";
+import PropTypes from "prop-types";
+import Paper from "@material-ui/core/Paper";
+import { withStyles } from "@material-ui/core/styles";
+import Avatar from "@material-ui/core/Avatar";
+import Typography from "@material-ui/core/Typography";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { toCelsius } from "../utils/utils";
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     flexGrow: 1,
-    overflow: 'hidden',
+    overflow: "hidden",
     padding: `0 ${theme.spacing(3)}px`,
   },
   paper: {
     maxWidth: 800,
     margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(2),
-  }
+  },
 });
 
 const WeatherItem = (props) => {
@@ -32,48 +32,55 @@ const WeatherItem = (props) => {
   // If weather can't be shown, a special text will be displayed
   let specialText;
   if (props.loading) {
-    specialText = 'Loading...';
+    specialText = "Loading...";
   } else if (props.error) {
-    specialText = 'Location can\'t be found!';
-  };
-
+    specialText = "Location can't be found!";
+  }
 
   if (props.loading || props.error) {
     return (
       <Paper className={classes.paper}>
-      <List className={classes.root}>
-        <ListItem alignItems="flex-start">
-          <ListItemText primary={specialText} />
-        </ListItem>
-      </List>
-    </Paper>
+        <List className={classes.root}>
+          <ListItem alignItems="flex-start">
+            <ListItemText primary={specialText} />
+          </ListItem>
+        </List>
+      </Paper>
     );
-  };
+  }
 
   // Button that either saves the location or removes it from saved locations
   let saveButton;
   if (props.savedCities.includes(props.data.name)) {
     saveButton = (
-      <IconButton aria-label="Delete" className={classes.margin} onClick={() => {
-        if (typeof props.id !== "number") {
-          props.handleSave(props.data, -1);
-        } else {
-          props.handleSave(props.data, props.id);
-        }
-      }}>
+      <IconButton
+        aria-label="Delete"
+        className={classes.margin}
+        onClick={() => {
+          if (typeof props.id !== "number") {
+            props.handleSave(props.data, -1);
+          } else {
+            props.handleSave(props.data, props.id);
+          }
+        }}
+      >
         <DeleteIcon />
       </IconButton>
     );
   } else {
     saveButton = (
-      <IconButton aria-label="Add" className={classes.margin} onClick={() => {
-        props.handleSave(props.data, props.id);
-        props.clear();
-        }}>
+      <IconButton
+        aria-label="Add"
+        className={classes.margin}
+        onClick={() => {
+          props.handleSave(props.data, props.id);
+          props.clear();
+        }}
+      >
         <AddIcon />
       </IconButton>
     );
-  };
+  }
 
   return (
     <Paper className={classes.paper}>
@@ -87,7 +94,11 @@ const WeatherItem = (props) => {
               primary={`${props.data.name}, ${props.data.sys.country}`}
               secondary={
                 <React.Fragment>
-                  <Typography component="span" className={classes.inline} color="textPrimary">
+                  <Typography
+                    component="span"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
                     {`${toCelsius(props.data.main.temp)} °C, ${props.data.weather[0].main}`}
                   </Typography>
                   {`min ${toCelsius(props.data.main.temp_min)} °C, max ${toCelsius(props.data.main.temp_max)} °C,
@@ -100,7 +111,11 @@ const WeatherItem = (props) => {
             <ListItemText
               secondary={
                 <React.Fragment>
-                  <Typography component="span" className={classes.inline} color="textPrimary">
+                  <Typography
+                    component="span"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
                     Clouds
                   </Typography>
                   {`${props.data.clouds.all}%`}
@@ -110,7 +125,11 @@ const WeatherItem = (props) => {
             <ListItemText
               secondary={
                 <React.Fragment>
-                  <Typography component="span" className={classes.inline} color="textPrimary">
+                  <Typography
+                    component="span"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
                     Wind
                   </Typography>
                   {`${props.data.wind.speed} m/s`}
@@ -120,7 +139,11 @@ const WeatherItem = (props) => {
             <ListItemText
               secondary={
                 <React.Fragment>
-                  <Typography component="span" className={classes.inline} color="textPrimary">
+                  <Typography
+                    component="span"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
                     Humidity
                   </Typography>
                   {`${props.data.main.humidity}%`}
@@ -132,7 +155,11 @@ const WeatherItem = (props) => {
             <ListItemText
               secondary={
                 <React.Fragment>
-                  <Typography component="span" className={classes.inline} color="textPrimary">
+                  <Typography
+                    component="span"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
                     Pressure
                   </Typography>
                   {`${props.data.main.pressure} hpa`}
@@ -142,7 +169,11 @@ const WeatherItem = (props) => {
             <ListItemText
               secondary={
                 <React.Fragment>
-                  <Typography component="span" className={classes.inline} color="textPrimary">
+                  <Typography
+                    component="span"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
                     Location
                   </Typography>
                   {`lon: ${props.data.coord.lon}, lat: ${props.data.coord.lat}`}
@@ -150,14 +181,14 @@ const WeatherItem = (props) => {
               }
             />
             <ListItemText
-                secondary={<React.Fragment>{saveButton}</React.Fragment>}
+              secondary={<React.Fragment>{saveButton}</React.Fragment>}
             />
           </ListItem>
         </React.Fragment>
       </List>
     </Paper>
   );
-}
+};
 
 WeatherItem.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -5,6 +5,7 @@ Weather Now is a weather explorer for showing the current weather in inputted ci
 Search for a location and click the plus icon (+) to save it in your favorites. If you want to remove it, just click the trash bin icon instead.
 
 The app will show following information:
+
 - Current, max, and min temperature
 - A little description about the weather. Maybe it's snowing? Or just cloudy.
 - Cloud percentage

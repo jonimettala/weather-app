@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import NavBar from './components/NavBar';
-import SearchField from './components/SearchField';
-import WeatherList from './components/WeatherList';
+import React, { Component } from "react";
+import NavBar from "./components/NavBar";
+import SearchField from "./components/SearchField";
+import WeatherList from "./components/WeatherList";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state =  {
+    this.state = {
       searchInput: "",
       lastSearch: null,
       savedWeathers: [],
       savedCities: [],
       error: false,
       loading: false,
-      debugging: false
+      debugging: false,
     };
   }
 
@@ -25,72 +25,79 @@ class App extends Component {
   // Saves saved locations to browser's local storage
   saveToLocalStorage = () => {
     // @ts-ignore
-    localStorage.setItem('cities', JSON.stringify(this.state.savedCities));
+    localStorage.setItem("cities", JSON.stringify(this.state.savedCities));
     // @ts-ignore
-    localStorage.setItem('weathers', JSON.stringify(this.state.savedWeathers));
-  }
+    localStorage.setItem("weathers", JSON.stringify(this.state.savedWeathers));
+  };
 
   // Loads saved locations from browser's local storage
   loadFromLocalStorage = () => {
     try {
       let cities = [];
       // @ts-ignore
-      let weathers = JSON.parse(localStorage.getItem('weathers'));
+      let weathers = JSON.parse(localStorage.getItem("weathers"));
       // @ts-ignore
-      cities = JSON.parse(localStorage.getItem('cities'));
+      cities = JSON.parse(localStorage.getItem("cities"));
 
       if (cities.length !== 0) {
         this.setState({
           savedWeathers: weathers,
-          savedCities: cities
+          savedCities: cities,
         });
       }
     } catch (e) {
-      console.log('Error while trying to load local storage data');
+      console.log("Error while trying to load local storage data");
     }
-  }
+  };
 
   // Removes the last search result from UI
   clearLastResult = () => {
     this.setState({
       lastSearch: null,
       error: null,
-      loading: null
+      loading: null,
     });
-  }
+  };
 
   // Callback function to update the user input
   updateSearching = (event) => {
     this.setState({ searchInput: event.target.value });
-  }
+  };
 
   fetchWeather = (location) => {
     // Let's try to fetch location only if location was entered
     if (location !== "") {
       this.setState({ loading: true, error: false });
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          throw Error(`Location not found.\n\nNo weather data available for location '${location}'.`);
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ lastSearch: data, loading: false, error: false },
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`,
+      )
+        .then((response) => {
+          if (response.ok) {
+            return response;
+          } else {
+            throw Error(
+              `Location not found.\n\nNo weather data available for location '${location}'.`,
+            );
+          }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          this.setState(
+            { lastSearch: data, loading: false, error: false },
             // @ts-ignore
-          () => {if (this.state.debugging) {
-            console.log(data);
-          }}
-        );
-      })
-      .catch(error => {
-        console.error(error);
-        this.setState({ lastSearch: "", loading: false, error: true });
-      })
+            () => {
+              if (this.state.debugging) {
+                console.log(data);
+              }
+            },
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+          this.setState({ lastSearch: "", loading: false, error: true });
+        });
     }
-  }
+  };
 
   // Fetches updated data
   /*
@@ -107,25 +114,29 @@ class App extends Component {
       let weathers = this.state.savedCities;
       this.setState({
         savedWeathers: [],
-        savedCities: []
-      })
+        savedCities: [],
+      });
       weathers.forEach((location) => {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
-        .then(response => {
-          if (response.ok) {
-            return response;
-          } else {
-            throw Error(`Location not found.\n\nNo weather data available for location '${location}'.`);
-          }
-        })
-        .then(response => response.json())
-        .then((data) => this.saveWeather(data))
-        .catch(error => {
-          console.error(error);
-        })
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`,
+        )
+          .then((response) => {
+            if (response.ok) {
+              return response;
+            } else {
+              throw Error(
+                `Location not found.\n\nNo weather data available for location '${location}'.`,
+              );
+            }
+          })
+          .then((response) => response.json())
+          .then((data) => this.saveWeather(data))
+          .catch((error) => {
+            console.error(error);
+          });
       });
     }
-  }
+  };
 
   // Callback function for saving or removing the location
   handleWeatherSave = (weatherData, id) => {
@@ -139,41 +150,46 @@ class App extends Component {
     } else {
       this.saveWeather(weatherData);
     }
-  }
+  };
 
   // Saves the location to saved locations
   saveWeather = (weatherData) => {
-    this.setState({
-      // @ts-ignore
-      savedWeathers: [weatherData].concat(this.state.savedWeathers),
-      // @ts-ignore
-      savedCities: [weatherData.name].concat(this.state.savedCities)
-     },
-    () => {
-      this.saveToLocalStorage();
+    this.setState(
+      {
         // @ts-ignore
-      if (this.state.debugging) {
+        savedWeathers: [weatherData].concat(this.state.savedWeathers),
         // @ts-ignore
-        console.log(this.state.savedWeathers);
-      }
-    });
-  }
+        savedCities: [weatherData.name].concat(this.state.savedCities),
+      },
+      () => {
+        this.saveToLocalStorage();
+        // @ts-ignore
+        if (this.state.debugging) {
+          // @ts-ignore
+          console.log(this.state.savedWeathers);
+        }
+      },
+    );
+  };
 
   // Removes the location from saved locations
   removeWeather = (id) => {
-    this.setState({
-      // @ts-ignore
-      savedWeathers: this.state.savedWeathers.filter((_, i) => i !== id),
-      // @ts-ignore
-      savedCities: this.state.savedCities.filter((_, i) => i !== id)
-    }, () => {
-      this.saveToLocalStorage();
-      // @ts-ignore
-      if (this.state.debugging) {
-        console.log(`Removed weather with id ${id}`);
-      }
-    });
-  }
+    this.setState(
+      {
+        // @ts-ignore
+        savedWeathers: this.state.savedWeathers.filter((_, i) => i !== id),
+        // @ts-ignore
+        savedCities: this.state.savedCities.filter((_, i) => i !== id),
+      },
+      () => {
+        this.saveToLocalStorage();
+        // @ts-ignore
+        if (this.state.debugging) {
+          console.log(`Removed weather with id ${id}`);
+        }
+      },
+    );
+  };
 
   render() {
     return (
@@ -193,7 +209,9 @@ class App extends Component {
           savedWeathers={this.state.savedWeathers}
           // @ts-ignore
           savedCities={this.state.savedCities}
-          handleWeatherSave={(weatherData, id) => this.handleWeatherSave(weatherData, id)}
+          handleWeatherSave={(weatherData, id) =>
+            this.handleWeatherSave(weatherData, id)
+          }
           // @ts-ignore
           error={this.state.error}
           // @ts-ignore

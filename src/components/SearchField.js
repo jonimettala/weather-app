@@ -1,19 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import SearchIcon from "@material-ui/icons/Search";
 
 const styles = {
   root: {
-    padding: '2px 4px',
-    display: 'flex',
-    alignItems: 'center',
+    padding: "2px 4px",
+    display: "flex",
+    alignItems: "center",
     width: 400,
-    margin: 'auto',
-    marginTop: '20px',
+    margin: "auto",
+    marginTop: "20px",
   },
   input: {
     marginLeft: 8,
@@ -39,14 +39,18 @@ function CustomizedInputBase(props) {
         placeholder="Search Weather"
         onChange={(event) => props.updateSearchingState(event)}
         onKeyPress={(ev) => {
-          if (ev.key === 'Enter') {
+          if (ev.key === "Enter") {
             props.fetchWeather(props.searchInput);
             ev.preventDefault();
           }
         }}
         autoFocus
       />
-      <IconButton className={classes.iconButton} aria-label="Search" onClick={() => props.fetchWeather(props.searchInput)} >
+      <IconButton
+        className={classes.iconButton}
+        aria-label="Search"
+        onClick={() => props.fetchWeather(props.searchInput)}
+      >
         <SearchIcon />
       </IconButton>
     </Paper>

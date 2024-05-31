@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import WeatherItem from './WeatherItem';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import WeatherItem from "./WeatherItem";
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     flexGrow: 1,
-    overflow: 'hidden',
+    overflow: "hidden",
     padding: `0 ${theme.spacing(3)}px`,
   },
   paper: {
@@ -15,8 +15,8 @@ const styles = theme => ({
     padding: theme.spacing(2),
   },
   divider: {
-    marginTop: '100px',
-  }
+    marginTop: "100px",
+  },
 });
 
 function WeatherList(props) {
@@ -25,16 +25,20 @@ function WeatherList(props) {
   // Shows the last search result data
   const showLastSearch = () => {
     if (props.lastSearch !== null) {
-      return <WeatherItem 
-        data={props.lastSearch}
-        handleSave={(weatherData, id) => props.handleWeatherSave(weatherData, id)}
-        savedCities={props.savedCities}
-        loading={props.loading}
-        error={props.error}
-        clear={() => props.clearLastResult()}
-      />;
+      return (
+        <WeatherItem
+          data={props.lastSearch}
+          handleSave={(weatherData, id) =>
+            props.handleWeatherSave(weatherData, id)
+          }
+          savedCities={props.savedCities}
+          loading={props.loading}
+          error={props.error}
+          clear={() => props.clearLastResult()}
+        />
+      );
     }
-  }
+  };
 
   return (
     <div className={classes.root}>
@@ -43,7 +47,9 @@ function WeatherList(props) {
         <WeatherItem
           data={weather}
           savedCities={props.savedCities}
-          handleSave={(weatherData, id) => props.handleWeatherSave(weatherData, id)}
+          handleSave={(weatherData, id) =>
+            props.handleWeatherSave(weatherData, id)
+          }
           key={i}
           id={i}
         />
